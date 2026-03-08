@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2086,SC2181,SC2034,SC2116
 
-## Author: Tommy Miland (@tmiland) - Copyright (c) 2025
+## Author: Tommy Miland (@tmiland) - Copyright (c) 2026
 
 
 ######################################################################
@@ -17,7 +17,7 @@ VERSION='1.0.0'
 #
 # MIT License
 #
-# Copyright (c) 2025 Tommy Miland
+# Copyright (c) 2026 Tommy Miland
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -87,8 +87,8 @@ warn() {
 
 cd "${REPO_DIR}" || exit
 # Always set Copyright year to current year
-sed -i "s|## Author: Tommy Miland (@tmiland) - Copyright (c) .*|## Author: Tommy Miland (@tmiland) - Copyright (c) $YEAR|g" "$RELEASE_FILE"
-sed -i "s|# Copyright (c) .*|# Copyright (c) $YEAR Tommy Miland|g" "$RELEASE_FILE"
+sed -i "s|## Author: Tommy Miland (@tmiland) - Copyright (c) 2026
+sed -i "s|# Copyright (c) 2026 Tommy Miland
 
 RELEASE_VERSION=$(curl --silent --user "$GH_USER:$GH_TOKEN" "https://api.github.com/repos/$GH_REPO_USER/$REPO_NAME/releases/latest" |
   grep '"tag_name":' |
