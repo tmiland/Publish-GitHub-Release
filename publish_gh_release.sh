@@ -87,8 +87,8 @@ warn() {
 
 cd "${REPO_DIR}" || exit
 # Always set Copyright year to current year
-sed -i "s|## Author: Tommy Miland (@tmiland) - Copyright (c) 2026
-sed -i "s|# Copyright (c) 2026 Tommy Miland
+sed -i "s|## Author: Tommy Miland (@tmiland) - Copyright (c) .*|## Author: Tommy Miland (@tmiland) - Copyright (c) $YEAR|g" "$RELEASE_FILE"
+sed -i "s|# Copyright (c) .*|# Copyright (c) $YEAR Tommy Miland|g" "$RELEASE_FILE"
 
 RELEASE_VERSION=$(curl --silent --user "$GH_USER:$GH_TOKEN" "https://api.github.com/repos/$GH_REPO_USER/$REPO_NAME/releases/latest" |
   grep '"tag_name":' |
