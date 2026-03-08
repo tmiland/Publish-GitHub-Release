@@ -87,8 +87,7 @@ warn() {
 
 cd "${REPO_DIR}" || exit
 # Always set Copyright year to current year
-sed -i "s|## Author: Tommy Miland (@tmiland) - Copyright (c) 2026
-sed -i "s|# Copyright (c) 2026 Tommy Miland
+sed -i "s|Copyright (c) .*|Copyright (c) $YEAR|g" "$RELEASE_FILE"
 
 RELEASE_VERSION=$(curl --silent --user "$GH_USER:$GH_TOKEN" "https://api.github.com/repos/$GH_REPO_USER/$REPO_NAME/releases/latest" |
   grep '"tag_name":' |
@@ -172,7 +171,7 @@ then
     LOCAL_VERSION="${major}.${minor}.${patch}"
     # echo the new version number
     echo "New version: v${LOCAL_VERSION}"
-    sed -i "14s|VERSION=.*|VERSION='$LOCAL_VERSION'|g" "$RELEASE_FILE"
+    sed -i "s|VERSION=.*|VERSION='$LOCAL_VERSION'|g" "$RELEASE_FILE"
     echo "Local version incremented to v$LOCAL_VERSION"
     echo "Publishing $REPO_NAME release version v$LOCAL_VERSION"
     publish_release "Update $REPO_NAME version from v$RELEASE_VERSION to v$LOCAL_VERSION"
