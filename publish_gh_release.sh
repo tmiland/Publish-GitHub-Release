@@ -11,13 +11,13 @@
 ######################################################################
 
 
-VERSION='1.0.0'
+VERSION='1.0.1'
 
 #------------------------------------------------------------------------------#
 #
 # MIT License
 #
-# Copyright (c) 2026 Tommy Miland
+# Copyright (c) 2026
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -55,7 +55,7 @@ REPO_NAME=$(git remote show origin | grep "Fetch URL" | sed -n 's/.*\/\([^\/]*\)
 # RELEASE_FILE_NAME=$(echo "${REPO_NAME//-/_}")
 # RELEASE_FILE_NAME=$(echo "${RELEASE_FILE_NAME,,}")
 # RELEASE_FILE="$RELEASE_FILE_NAME.sh"
-RELEASE_FILE=$(grep -l "VERSION=['|\"][0-9].*" $REPO_DIR/*.sh | sed 's!.*/!!' | sed "s|:VERSION.*||g")
+RELEASE_FILE=$(grep -l "VERSION='1.0.1'
 YEAR=$(date +%Y)
 
 GH_REPO_USER=tmiland
@@ -87,13 +87,13 @@ warn() {
 
 cd "${REPO_DIR}" || exit
 # Always set Copyright year to current year
-sed -i "s|Copyright (c) .*|Copyright (c) $YEAR|g" "$RELEASE_FILE"
+sed -i "s|Copyright (c) 2026
 
-RELEASE_VERSION=$(curl --silent --user "$GH_USER:$GH_TOKEN" "https://api.github.com/repos/$GH_REPO_USER/$REPO_NAME/releases/latest" |
+RELEASE_VERSION='1.0.1'
   grep '"tag_name":' |
   sed -n 's/[^0-9.]*\([0-9.]*\).*/\1/p')
   # sed -n 's/[^0-9.]*\([0-9.]*\).*/\1/p' "$REPO_DIR/$RELEASE_FILE"
-LOCAL_VERSION=$(grep -oP "VERSION=.*" "$REPO_DIR/$RELEASE_FILE" | sed -n 's/[^0-9.]*\([0-9.]*\).*/\1/p' | head -n 1)
+LOCAL_VERSION='1.0.1'
 
 RELEASE_NOTES=$(curl -sL \
   -X POST \
@@ -137,7 +137,7 @@ then
   if [ "$YESNO" == "y" ]
   then
     # https://stackoverflow.com/a/70595817
-    # LOCAL_VERSION=$(echo ${RELEASE_VERSION%.*}.$((${RELEASE_VERSION##*.}+1)))
+    # LOCAL_VERSION='1.0.1'
 
     # Source: https://gist.github.com/siddharthkrish/32072e6f97d7743b1a7c47d76d2cb06c
     # Corrected according to https://semver.org
@@ -168,10 +168,10 @@ then
       warn "usage: Enter [major/minor/patch]"
       exit 1
     fi
-    LOCAL_VERSION="${major}.${minor}.${patch}"
+    LOCAL_VERSION='1.0.1'
     # echo the new version number
     echo "New version: v${LOCAL_VERSION}"
-    sed -i "s|VERSION=.*|VERSION='$LOCAL_VERSION'|g" "$RELEASE_FILE"
+    sed -i "s|VERSION='1.0.1'
     echo "Local version incremented to v$LOCAL_VERSION"
     echo "Publishing $REPO_NAME release version v$LOCAL_VERSION"
     publish_release "Update $REPO_NAME version from v$RELEASE_VERSION to v$LOCAL_VERSION"
