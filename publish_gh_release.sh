@@ -58,9 +58,6 @@ REPO_NAME=$(git remote show origin | grep "Fetch URL" | sed -n 's/.*\/\([^\/]*\)
 RELEASE_FILE=$(grep -l "VERSION=['|\"][0-9].*" $REPO_DIR/*.sh | sed 's!.*/!!' | sed "s|:VERSION.*||g")
 YEAR=$(date +%Y)
 
-AUTHOR="Tommy Miland"
-AUTHOR_USERNAME="tmiland"
-
 GH_REPO_USER=tmiland
 GH_REPO=$REPO_NAME
 GH_USER=$GH_REPO_USER
@@ -90,8 +87,8 @@ warn() {
 
 cd "${REPO_DIR}" || exit
 # Always set Copyright year to current year
-sed -i "s|## Author: ${AUTHOR} (@${AUTHOR_USERNAME}) - Copyright (c) .*|## Author: ${AUTHOR} (@${AUTHOR_USERNAME}) - Copyright (c) $YEAR|g" "$RELEASE_FILE"
-sed -i "s|# Copyright (c) .*|# Copyright (c) $YEAR ${AUTHOR}|g" "$RELEASE_FILE"
+sed -i "s|## Author: Tommy Miland (@tmiland) - Copyright (c) .*|## Author: Tommy Miland (@tmiland) - Copyright (c) $YEAR|g" "$RELEASE_FILE"
+sed -i "s|# Copyright (c) .*|# Copyright (c) $YEAR Tommy Miland|g" "$RELEASE_FILE"
 
 RELEASE_VERSION=$(curl --silent --user "$GH_USER:$GH_TOKEN" "https://api.github.com/repos/$GH_REPO_USER/$REPO_NAME/releases/latest" |
   grep '"tag_name":' |
