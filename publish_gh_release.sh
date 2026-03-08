@@ -6,7 +6,7 @@
 
 ######################################################################
 ####                 Publish Github Release.sh                    ####
-####             A script to publish github releases              ####
+####            A script to publish github releases               ####
 ####                   Maintained by @tmiland                     ####
 ######################################################################
 
@@ -185,6 +185,7 @@ then
   read -rp "Looks like this is your first release, do you want to publish it? [y/n]" YESNO
   if [ "$YESNO" == "y" ]; then
     ok "Publishing $REPO_NAME release version v$LOCAL_VERSION"
+    RELEASE_NOTES="" \
     publish_release "First release of $REPO_NAME release version v$LOCAL_VERSION"
     exit 0
   fi
